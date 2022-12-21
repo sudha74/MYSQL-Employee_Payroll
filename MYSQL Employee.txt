@@ -313,3 +313,75 @@ mysql> select * from Employee_Payroll;
 |  4 | Tersia  | NULL         | TBD     | Marketing  | F      |   3000000 |    1000000 |     2000000 | 500000 | 1500000 | 2018-01-03 |
 +----+---------+--------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
 4 rows in set (0.00 sec)
+
+UC11_Draw the ER Diagram for Payroll Service DB. Implement the ER Diagram into Payroll Service DB
+
+
+ CREATE TABLE Department ( department varchar(250) NOT NULL, PRIMARY KEY (department) );
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> INSERT INTO Department ( department ) VALUES ('Sales'),('Marketing');
+Query OK, 2 rows affected (0.08 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Department;
++------------+
+| department |
++------------+
+| Marketing  |
+| Sales      |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Employee ( id int, compID int, PhoneNumbe BIGINT(13), Address varchar(25), gender char(1),
+    -> PRIMARY KEY (id) );
+Query OK, 0 rows affected, 1 warning (0.16 sec)
+
+mysql> INSERT INTO Employee (id, compID, PhoneNumbe, Address, gender) VALUES ( 1, 10, 7775827779, 'Mubai', 'F'),
+    -> (2, 11, 7775828889, 'Mumbai', 'M');
+Query OK, 2 rows affected (0.10 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Employee;
++----+--------+------------+---------+--------+
+| id | compID | PhoneNumbe | Address | gender |
++----+--------+------------+---------+--------+
+|  1 |     10 | 7775827779 | Mubai   | F      |
+|  2 |     11 | 7775828889 | Mumbai  | M      |
++----+--------+------------+---------+--------+
+2 rows in set (0.00 sec)
+CREATE TABLE Emp_Department (empID int, Depart varchar(250) NOT NULL, FOREIGN KEY (empID) REFERENCES Employee (id),
+    -> FOREIGN KEY (Depart) REFERENCES Department (department), PRIMARY KEY (empID, Depart));
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> describe Emp_Department;
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| empID  | int          | NO   | PRI | NULL    |       |
+| Depart | varchar(250) | NO   | PRI | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (1, 'Marketing');
+Query OK, 1 row affected (0.10 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (1, 'Sales');
+Query OK, 1 row affected (0.12 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (2, 'Sales');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO Emp_Department (empID, Depart) VALUES (2, 'Marketing');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> SELECT * FROM Emp_Department;
++-------+-----------+
+| empID | Depart    |
++-------+-----------+
+|     1 | Marketing |
+|     2 | Marketing |
+|     1 | Sales     |
+|     2 | Sales     |
++-------+-----------+
+4 rows in set (0.00 sec)
