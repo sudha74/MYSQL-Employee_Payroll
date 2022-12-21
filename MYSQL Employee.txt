@@ -94,3 +94,49 @@ mysql> select* from employee_payroll where start between cast('2020-01-01' as da
 |  3 | Charlie | 300000 | 2020-05-21 |
 +----+---------+--------+------------+
 1 row in set (0.00 sec)
+
+UC6_Adding_Gender_To_The_Table
+
+ alter table employee_payroll add gender char(1) after name;
+Query OK, 0 rows affected (0.20 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(100) | NO   |     | NULL    |                |
+| gender | char(1)      | YES  |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+update employee_payroll set gender = 'M'  where name = 'Bill' or  name = 'Charlie'
+    -> ;
+Query OK, 2 rows affected (0.14 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Bill    | M      | 1000000 | 2010-10-30 |
+|  2 | Tersia  | NULL   | 2000000 | 2019-11-13 |
+|  3 | Charlie | M      |  300000 | 2020-05-21 |
++----+---------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll set gender = 'F'  where name = 'Tersia';
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Bill    | M      | 1000000 | 2010-10-30 |
+|  2 | Tersia  | F      | 2000000 | 2019-11-13 |
+|  3 | Charlie | M      |  300000 | 2020-05-21 |
++----+---------+--------+---------+------------+
+3 rows in set (0.00 sec)
