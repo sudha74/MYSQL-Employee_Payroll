@@ -60,3 +60,37 @@ mysql> select * from employee_payroll
 |  3 | Charlie |  300000 | 2020-05-21 |
 +----+---------+---------+------------+
 3 rows in set (0.00 sec)
+
+UC5_Retrieve_Salary_DataBase
+
+select salary from employee_payroll where name = 'Bill';
++---------+
+| salary  |
++---------+
+| 1000000 |
++---------+
+1 row in set (0.00 sec)
+select salary from employee_payroll where start between cast('2018-01-01' as date) and date (now());
++---------+
+| salary  |
++---------+
+| 2000000 |
+|  300000 |
++---------+
+2 rows in set (0.04 sec)
+ select * from employee_payroll where start between cast('2018-01-01' as date) and date(now());
++----+---------+---------+------------+
+| id | name    | salary  | start      |
++----+---------+---------+------------+
+|  2 | Tersia  | 2000000 | 2019-11-13 |
+|  3 | Charlie |  300000 | 2020-05-21 |
++----+---------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select* from employee_payroll where start between cast('2020-01-01' as date) and date(now());
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  3 | Charlie | 300000 | 2020-05-21 |
++----+---------+--------+------------+
+1 row in set (0.00 sec)
