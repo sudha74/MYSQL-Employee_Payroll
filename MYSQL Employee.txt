@@ -1,0 +1,20 @@
+UC1_Create_DataBase
+
+mysql> create database payroll_service;
+ERROR 1007 (HY000): Can't create database 'payroll_service'; database exists
+mysql> create database payroll_service_new;
+Query OK, 1 row affected (0.55 sec)
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| demo                |
+| information_schema  |
+| mysql               |
+| payroll_service     |
+| payroll_service_new |
+| performance_schema  |
+| sys                 |
++---------------------+
+7 rows in set (0.26 sec)
