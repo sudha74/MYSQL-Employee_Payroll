@@ -18,3 +18,26 @@ mysql> show databases;
 | sys                 |
 +---------------------+
 7 rows in set (0.26 sec)
+
+UC2_Create_Table
+
+mysql> use payroll_service_new
+Database changed
+mysql> create table employee_payroll(
+    -> id int unsigned not null auto_increment,
+    -> name varchar(100) not null,
+    -> salary double not null,
+    -> start date not null,
+    -> primary key(id));
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> desc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(100) | NO   |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+4 rows in set (0.08 sec)
